@@ -3,7 +3,7 @@ const bodyparser=require("body-parser");
 
 const mongoose=require("mongoose");
 const _=require("lodash");
-const app=express();
+const app=express(); 
 var items=[]
 let workitems=[]
 app.set('view engine','ejs');
@@ -110,13 +110,16 @@ app.get("/:customListName",function(req,res){
     
 
 })
-app.get("/work",function(req,res){
-   res.render("list",{listtitle:"work List",newlistitems:workitems}) 
-}) 
+
 app.get("/about",function(req,res){
     res.render("about") 
  }) 
-app.listen("3000",function()
+ let port=process.env.PORT;
+ if(port==null||port==""){
+    port=3000;
+ }
+
+app.listen(port,function()
 {
-    console.log("app is running");
+    console.log("server has started sucessfully");
 })
